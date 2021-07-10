@@ -1,9 +1,17 @@
+// great video of demoing how everything works: 
+// https://courses.bootcampspot.com/courses/562/pages/18-dot-2-6-create-and-test-the-routes?module_item_id=165584
 const { Pizza } = require('../models');
 
 const pizzaController = {
     // get all pizzas
     getAllPizza(req, res) {
         Pizza.find({})
+            .populate({ // <----- populate the field then
+                path: 'comments',
+                select: '-__v'
+            })
+            .select('-__v')
+            .sort({ _id: -1 }) // <-- this sorts it in DESC order by the _id Value
             .then(dbPizzaData => res.json(dbPizzaData))
             .catch(err => {
                 console.log(err);
@@ -14,6 +22,11 @@ const pizzaController = {
     // get one pizza by id
     getPizzaById({ params }, res) {
         Pizza.findOne({ _id: params.id })
+            .populate({
+                path: 'comments',
+                select: '-__v'
+            })
+            .select('-__v')
             .then(dbPizzaData => {
                 // If no pizza is found, send 404
                 if (!dbPizzaData) {
