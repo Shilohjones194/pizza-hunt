@@ -7,7 +7,7 @@ const pizzaController = {
     getAllPizza(req, res) {
         Pizza.find({})
             .populate({ // <----- populate the field then
-                path: 'comments',
+                path: 'comments', // <-- without this, you wouldn't be able to see the comments associated with the pizzas
                 select: '-__v'
             })
             .select('-__v')
@@ -22,7 +22,7 @@ const pizzaController = {
     // get one pizza by id
     getPizzaById({ params }, res) {
         Pizza.findOne({ _id: params.id })
-            .populate({
+            .populate({ // <--- to get the full document for of an ObjectID in a different document.
                 path: 'comments',
                 select: '-__v'
             })

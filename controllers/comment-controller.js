@@ -1,4 +1,4 @@
-// great video of demostrating how everything works: 
+// great video of demoing how everything works: 
 // https://courses.bootcampspot.com/courses/562/pages/18-dot-2-6-create-and-test-the-routes?module_item_id=165584
 // just like Pizza-controller, we will need to import the models we need.
 
